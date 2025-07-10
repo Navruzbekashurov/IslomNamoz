@@ -38,8 +38,6 @@ class SectionResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $lang = $request->query('lang', 'en');
-
         foreach ($this->content as $content) {
 
                 if ($content->field_name === 'name') {
