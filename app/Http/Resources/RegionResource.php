@@ -26,8 +26,6 @@ use OpenApi\Annotations as OA;
  *     )
  * )
  */
-
-
 class RegionResource extends JsonResource
 {
     /**
@@ -37,12 +35,10 @@ class RegionResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $lang = $request->query('lang', 'uz');
+        foreach ($this->content as $item) {
+                $name = $item->field_value;
 
-        $name = $this->content
-            ->where('language', $lang)
-            ->first()
-            ?->field_value ?? 'unknown';
+        }
 
         return [
             'id' => $this->id,

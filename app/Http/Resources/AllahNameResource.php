@@ -34,6 +34,7 @@ class AllahNameResource extends JsonResource
             }
         return [
             'id' => $this->id,
+            'name_arabic' => $this->name_arabic,
             'name' => $name ?? 'unknown',
             'description' => $description,
         ];
