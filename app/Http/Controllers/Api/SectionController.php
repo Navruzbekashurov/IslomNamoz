@@ -60,4 +60,5 @@ class SectionController
         return response()->json(SectionResource::collection($sections));
     }
 
+
 }
