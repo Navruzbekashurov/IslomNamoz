@@ -44,8 +44,7 @@ class SectionResource extends JsonResource
             if ($content->language === $lang) {
                 if ($content->field_name === 'name') {
                     $name = $content->field_value;
-                }
-                if ($content->field_name === 'description') {
+                } elseif ($content->field_name === 'description') {
                     $description = $content->field_value;
                 }
             }
