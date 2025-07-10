@@ -1,0 +1,298 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "IslomNomoz API",
+        "description": "This is the Swagger API document of the IslamNomoz application.",
+        "version": "2.0.0"
+    },
+    "paths": {
+        "/api/allah-names": {
+            "get": {
+                "tags": [
+                    "Allah Names"
+                ],
+                "summary": "Get list of Allah's names",
+                "description": "Returns 99 names of Allah filtered by language and optionally by type_id",
+                "operationId": "185f4ead5d4a665d3bf0949830b84ee1",
+                "parameters": [
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Language code (uz, en, ru, etc.)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "en"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response with list of names",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AllahNameResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/ramadan-calendar/by-region": {
+            "get": {
+                "tags": [
+                    "Ramadan Calendar"
+                ],
+                "summary": "Get Ramadan calendar by region ID",
+                "description": "Returns full Ramadan calendar (30 days) for a region.",
+                "operationId": "fe63d2ecf3b8d194cb5c2c182c266bc0",
+                "parameters": [
+                    {
+                        "name": "region_id",
+                        "in": "query",
+                        "description": "ID of the region",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of Ramadan calendar days",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RamadanCalendarResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "region_id needed"
+                    }
+                }
+            }
+        },
+        "/api/regions": {
+            "get": {
+                "tags": [
+                    "Regions"
+                ],
+                "summary": "Get a list of regions",
+                "description": "Returns a list of regions by language. If 'lang' is not specified, 'uz' is used.",
+                "operationId": "9ac6e3c6921b30dc55997db00aacb038",
+                "parameters": [
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Language (uz, ru, en, уз)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "uz"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of successful regions",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RegionResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error query"
+                    }
+                }
+            }
+        },
+        "/api/sections": {
+            "get": {
+                "tags": [
+                    "Sections"
+                ],
+                "summary": "Get sections by language and optional type ID",
+                "description": "Returns a list of sections filtered by language and optionally by type ID.",
+                "operationId": "250255e4b083efa2428c8965c33bcf29",
+                "parameters": [
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Language code (uz, ru, en, уз)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "en"
+                        }
+                    },
+                    {
+                        "name": "type_id",
+                        "in": "query",
+                        "description": "Filter by ID (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of sections",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SectionResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AllahNameResource": {
+                "title": "Allah Name",
+                "required": [
+                    "id",
+                    "name",
+                    "description"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Ar-Rahman"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "The Most Merciful"
+                    }
+                },
+                "type": "object"
+            },
+            "RamadanCalendarResource": {
+                "title": "Ramadan Day",
+                "required": [
+                    "date",
+                    "suhur_time",
+                    "iftar_time"
+                ],
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-03-22"
+                    },
+                    "suhur_time": {
+                        "type": "string",
+                        "example": "04:45"
+                    },
+                    "iftar_time": {
+                        "type": "string",
+                        "example": "18:47"
+                    },
+                    "region_id": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "RegionResource": {
+                "title": "Region Resource",
+                "description": "Region information",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Region ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "Region name",
+                        "type": "string",
+                        "example": "Toshkent"
+                    }
+                },
+                "type": "object"
+            },
+            "SectionResource": {
+                "title": "Section",
+                "required": [
+                    "id",
+                    "type_id"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "type_id": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "name": {
+                        "description": "Translated section name in the requested language",
+                        "type": "string",
+                        "example": "Five Pillars of Islam",
+                        "nullable": true
+                    },
+                    "description": {
+                        "description": "Translated section description listing the five pillars of Islam",
+                        "type": "string",
+                        "example": "1. Shahada (Faith) 2. Salah (Prayer) 3. Sawm (Fasting in Ramadan) 4. Zakat (Charity) 5. Hajj (Pilgrimage to Mecca)",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Allah Names",
+            "description": "Allah Names"
+        },
+        {
+            "name": "Ramadan Calendar",
+            "description": "Ramadan Calendar"
+        },
+        {
+            "name": "Regions",
+            "description": "Regions"
+        },
+        {
+            "name": "Sections",
+            "description": "Sections"
+        }
+    ]
+}
