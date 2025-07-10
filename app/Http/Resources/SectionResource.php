@@ -41,14 +41,13 @@ class SectionResource extends JsonResource
         $lang = $request->query('lang', 'en');
 
         foreach ($this->content as $content) {
-            if ($content->language === $lang) {
+
                 if ($content->field_name === 'name') {
                     $name = $content->field_value;
                 } elseif ($content->field_name === 'description') {
                     $description = $content->field_value;
                 }
             }
-        }
 
         return [
             'id' => $this->id,
