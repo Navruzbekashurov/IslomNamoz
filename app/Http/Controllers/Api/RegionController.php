@@ -21,7 +21,7 @@ class RegionController
      *         in="query",
      *         description="Language (uz, ru, en, уз)",
      *         required=false,
-     *         @OA\Schema(type="string", example="uz")
+     *         @OA\Schema(type="string", example="en")
      *     ),
      *     @OA\Response(
      *         response=200,
@@ -41,7 +41,7 @@ class RegionController
      */
     public function region(Request $request): JsonResponse
     {
-        $lang = $request->query('lang', 'uz');
+        $lang = $request->query('lang', 'en');
 
         $regions = Region::with(['content' => function ($q) use ($lang) {
             $q->where('language', $lang);

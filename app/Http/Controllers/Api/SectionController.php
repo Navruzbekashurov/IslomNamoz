@@ -44,7 +44,7 @@ class SectionController
 
     public function section(Request $request): JsonResponse
     {
-        $lang = $request->query('lang', 'uz');
+        $lang = $request->query('lang', 'en');
         $type_id = $request->query('type_id');
 
         $query = Section::with(['content' => fn($q) => $q->where('language', $lang)]);

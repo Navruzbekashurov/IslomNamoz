@@ -18,7 +18,7 @@
                     {
                         "name": "lang",
                         "in": "query",
-                        "description": "Language code (uz, en, ru, etc.)",
+                        "description": "Language code (uz, en, ru, уз.)",
                         "required": false,
                         "schema": {
                             "type": "string",
@@ -99,7 +99,7 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "example": "uz"
+                            "example": "en"
                         }
                     }
                 ],

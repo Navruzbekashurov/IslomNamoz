@@ -19,7 +19,7 @@ class AllahNameController
      *     @OA\Parameter(
      *         name="lang",
      *         in="query",
-     *         description="Language code (uz, en, ru, etc.)",
+     *         description="Language code (uz, en, ru, уз.)",
      *         required=false,
      *         @OA\Schema(type="string", example="en")
      *     ),
@@ -36,7 +36,7 @@ class AllahNameController
 
     public function allahname(Request $request): JsonResponse
     {
-        $lang = $request->query('lang', 'uz');
+        $lang = $request->query('lang', 'en');
 
         $names = AllahName::with(['content' => fn($q) => $q->where('language', $lang)])
             ->orderBy('id')
