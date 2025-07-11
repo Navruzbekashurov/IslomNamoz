@@ -30,31 +30,62 @@ use OpenApi\Annotations as OA;
  * )
  */
 class SectionResource extends JsonResource
+
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray($request): array
     {
+
+        $translation = [];
+
         foreach ($this->content as $content) {
+            $translation[$content["field_name"]] = $content["field_value"];
+        }
 
-                if ($content->field_name === 'name') {
-                    $name = $content->field_value;
-                } elseif ($content->field_name === 'description') {
-                    $description = $content->field_value;
-                }
-            }
-
-        return [
+        $data = [
             'id' => $this->id,
             'type_id' => $this->type_id,
-            'name' => $name,
-            'description' => $description,
+
         ];
+       return  array_merge($data, $translation);
+
     }
 }
+
+
+//  dd($array);
+//dd($this->content[0]);
+
+//{
+//    /**
+//     * Transform the resource into an array.
+//     *
+//     * @return array<string, mixed>
+//     */
+//    public function toArray($request): array
+//    {
+////        foreach ($this->content as $content) {
+////
+////                if ($content->field_name === 'name') {
+////                    $name = $content->field_value;
+////                } elseif ($content->field_name === 'description') {
+////                    $description = $content->field_value;
+////                }
+////            }
+//        $translation = [];
+//
+//        foreach ($this->content as $content) {
+//            $translation = array_merge($translation, [
+//                $content["field_name"] => $content["field_value"]
+//            ]);
+//        }
+//
+//        return [
+//            'id' => $this->id,
+//            'type_id' => $this->type_id,
+//            'translations' => $translation,
+//        ];
+//    }
+//}
 ////
 ////        foreach ($this->content as $content) {
 ////            $translation[] = [

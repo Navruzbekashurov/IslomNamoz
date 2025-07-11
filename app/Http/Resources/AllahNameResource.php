@@ -26,18 +26,40 @@ class AllahNameResource extends JsonResource
      */
     public function toArray($request): array
     {
-        foreach ($this->content as $item) {
-                if ($item->field_name === 'name') {
-                    $name = $item->field_value;
-                } elseif ($item->field_name === 'description') {
-                    $description = $item->field_value;
-                }
-            }
-        return [
+        $transaltion = [];
+
+        foreach ($this->content as $content) {
+            $transaltion[$content['field_name']] = $content['field_value'];
+        }
+
+        $data = [
             'id' => $this->id,
             'name_arabic' => $this->name_arabic,
-            'name' => $name ?? 'unknown',
-            'description' => $description,
         ];
+
+        return array_merge($data,$transaltion);
+
     }
 }
+
+//foreach ($this->content as $item) {
+//    if ($item->field_name === 'name') {
+//        $name = $item->field_value;
+//    } elseif ($item->field_name === 'description') {
+//        $description = $item->field_value;
+//    }
+//}
+////        [
+////            $item->field_name => $item->field_value
+////            $item->field_name => $item->field_value
+////            $item->field_name => $item->field_value
+////            $item->field_name => $item->field_value
+////            $item->field_name => $item->field_value
+////            $item->field_name => $item->field_value
+////        ]
+//return [
+//    'id' => $this->id,
+//    'name_arabic' => $this->name_arabic,
+//    'name' => $name ?? 'unknown',
+//    'description' => $description,
+//];

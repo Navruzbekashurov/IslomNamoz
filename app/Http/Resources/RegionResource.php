@@ -35,14 +35,17 @@ class RegionResource extends JsonResource
      */
     public function toArray($request): array
     {
-        foreach ($this->content as $item) {
-                $name = $item->field_value;
 
+        $translation = [];
+
+        foreach ($this->content as $content) {
+            $translation[$content["field_name"]] = $content["field_value"];
         }
 
-        return [
+        $data = [
             'id' => $this->id,
-            'name' => $name,
         ];
+        return  array_merge($data, $translation);
+
     }
 }
