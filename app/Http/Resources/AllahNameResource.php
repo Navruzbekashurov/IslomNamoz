@@ -12,6 +12,7 @@ use OpenApi\Annotations as OA;
  *     title="Allah Name",
  *     required={"id", "name", "description"},
  *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="name_arabic", type="string", example="الرَّحْمَٰن"),
  *     @OA\Property(property="name", type="string", example="Ar-Rahman"),
  *     @OA\Property(property="description", type="string", example="The Most Merciful")
  * )

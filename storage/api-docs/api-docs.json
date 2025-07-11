@@ -185,6 +185,10 @@
                         "type": "integer",
                         "example": 1
                     },
+                    "name_arabic": {
+                        "type": "string",
+                        "example": "الرَّحْمَٰن"
+                    },
                     "name": {
                         "type": "string",
                         "example": "Ar-Rahman"
